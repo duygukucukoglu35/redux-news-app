@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const user = false;
   const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -20,8 +21,10 @@ export default function Navbar() {
           >
             Clarusway News
           </Typography>
+          {user && <Button color="inherit">Logout</Button>}
+          {!user && <Button color="inherit">Login</Button>}
 
-          <Button color="inherit">Login</Button>
+          
         </Toolbar>
       </AppBar>
     </Box>
