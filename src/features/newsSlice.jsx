@@ -6,11 +6,11 @@ const initialState={
 const newsSlice=createSlice({
     name:"news",
     initialState,
-    redcers:{
+    reducers:{
         clearNewsList:(state)=>{
             state.newsList=[]
         }
     }
 })
-export const {clearNewsList}=newsSlice.actions
+export const {clearNewsList} = newsSlice.actions
 export default newsSlice.reducer
