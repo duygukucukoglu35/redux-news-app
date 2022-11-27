@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useState} from "react"
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../features/authSlice';
 
 const theme = createTheme();
 
@@ -18,11 +20,15 @@ export default function SignInSide() {
   
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const dispatch=useDispatch()
   const navigate=useNavigate()
 
   const handleSubmit = (event) => {
+   
     event.preventDefault()
     //TOD Global State
+    //veri yazdırmak için dispatch kullanılır 
+    dispatch(setUser({email,password}))
     setEmail("")
     setPassword("")
     navigate("/")
