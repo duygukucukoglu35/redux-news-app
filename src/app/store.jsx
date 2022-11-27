@@ -7,5 +7,5 @@ const store = configureStore({
         auth: authReducer,
         news: newsReducer
     }
-})
+});
 export default store
