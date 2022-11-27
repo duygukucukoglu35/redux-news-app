@@ -8,8 +8,9 @@ const initialState={
 //action,type,reducer bu slice(dilim) içinde tanımla
 //slice içerisine 3 method alır
 //name:type | reducers:reducer | initialState:yukarıdaki tanımlanan stateden.
-//action={type,payload} : type=name olduğundan type yazmaya gerek yok.
+//action={type,payload} : type=name olduğundan type yazmaya gerek yok.(case ismi)
 //return olmadığı için state.user=null yazarsın
+//action.type=reducer keyi 
 const authSlice=createSlice({
     name: "auth",
     initialState,
