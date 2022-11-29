@@ -33,7 +33,7 @@ const newsSlice = createSlice({
             state.newsList = []
         }
     },
-    extraReducers: (state) => {
+    extraReducers: (builder) => {
         builder
         .addCase(getNews.pending, (state) => {
             state.loading = true;
