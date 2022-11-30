@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit" 
+import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit" 
 import axios from "axios"
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
 }
 
 // middleware kullanmak için apiden veriler burada çekilmeli
-const getNews = createAsyncThunk("getNews", async()=> {
+const getNews = createAsyncThunk("getNews", async({rejectWithValue})=> {
     const API_KEY = "7682bb4d403a4557816f60660216f6f2"
     const url = `https://newsapi.org/v2/top-headlines?country=tr&category=business&apiKey=${API_KEY}`
     try {
@@ -16,6 +16,8 @@ const getNews = createAsyncThunk("getNews", async()=> {
         return data.articles
     } catch (error) {
         console.log(error)
+        //rejectWithValue:error durumunda hataları ekrana basan method
+        return rejectWithValue("Something went wrong")
     }
 })
 //dışarı kaynaklı verilerde extraReducer kullanır.
@@ -33,7 +35,7 @@ const newsSlice = createSlice({
             state.newsList = []
         }
     },
-    extraReducers: (state) => {
+    extraReducers: (builder) => {
         builder
         .addCase(getNews.pending, (state) => {
             state.loading = true;
@@ -42,7 +44,9 @@ const newsSlice = createSlice({
             state.loading = false; 
             state.newsList = payload
         })
-        .addCase(getNews.rejected, (state) => {
+        .addCase(getNews.rejected, (state,{payload}) => {
+            state.loading=false;
+            state.error=payload;
 
         })
     }
