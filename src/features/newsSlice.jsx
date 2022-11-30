@@ -8,7 +8,7 @@ const initialState = {
 }
 
 // middleware kullanmak için apiden veriler burada çekilmeli
-const getNews = createAsyncThunk("getNews", async({rejectWithValue})=> {
+export const getNews = createAsyncThunk("getNews", async({rejectWithValue})=> {
     const API_KEY = "7682bb4d403a4557816f60660216f6f2"
     const url = `https://newsapi.org/v2/top-headlines?country=tr&category=business&apiKey=${API_KEY}`
     try {
